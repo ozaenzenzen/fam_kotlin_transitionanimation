@@ -50,8 +50,17 @@ class ListHeroAdapter(private val listHero: ArrayList<Hero>) :
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, HeroActivity::class.java)
                 intent.putExtra("Hero", hero)
-                itemView.context.startActivity(intent,
-                    ActivityOptionsCompat.makeSceneTransitionAnimation(itemView.context as Activity)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(imgPhoto, "profile"),
+                        Pair(tvName, "name"),
+                        Pair(tvDescription, "description"),
+                    )
+                itemView.context.startActivity(
+                    intent,
+                    optionsCompat
                         .toBundle()
                 )
             }
